@@ -28,7 +28,7 @@
        <axis xyz="0 1 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>
-    <link name="leg">
+    <link name="Leg">
         <inertial>
             <origin xyz="1.0 0 1.5" rpy="0 0 0"/>
             <mass value="1" />
