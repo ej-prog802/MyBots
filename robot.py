@@ -37,12 +37,10 @@ class ROBOT:
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
-                print(neuronName+" "+jointName+" "+str(desiredAngle))
                 self.motors[jointName].Set_Value(self.robot, desiredAngle)
 
     def Think(self):
         self.nn.Update()
-        self.nn.Print()
 
     def Save_Values(self):
         for linkName in pyrosim.linkNamesToIndices:
