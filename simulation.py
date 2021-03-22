@@ -17,7 +17,7 @@ class SIMULATION:
          self.robot.Sense(i)
          self.robot.Think()
          self.robot.Act()
-         time.sleep(1/60)
+         time.sleep(1/240)
         self.robot.Save_Values()
 
     def __del__(self):
