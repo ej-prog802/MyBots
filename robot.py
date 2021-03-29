@@ -47,3 +47,10 @@ class ROBOT:
             numpy.save("Data/"+linkName+".npy", self.sensors[linkName].values)
         for jointName in pyrosim.jointNamesToIndices:
             numpy.save("Data/" + jointName + ".npy", self.motors[jointName].motorValues)
+
+    def Get_Fitness(self):
+        stateOfLinkZero = p.getLinkState(self.robot,0)[0]
+        xCoordinateOfLinkZero = stateOfLinkZero[0]
+        file = open('fitness.txt', 'w')
+        file.write(str(xCoordinateOfLinkZero))
+        file.close()
