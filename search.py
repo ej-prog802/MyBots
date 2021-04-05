@@ -1,5 +1,5 @@
-import os
-import hillclimber as hc
-
-var = hc.HILL_CLIMBER()
-var.Evolve()
+import parallelHillClimber as hc
+phc = hc.PARALLEL_HILL_CLIMBER()
+phc.Evolve()
+phc.Show_Best()
+phc.record.close()

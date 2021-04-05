@@ -1,6 +1,8 @@
 import numpy
-amplitude = numpy.pi/4
+
+amplitude = numpy.pi / 4
 frequency = 75
 phaseOffset = 0
 sz = 2000
-numberOfGenerations = 6
+numberOfGenerations = 20
+populationSize = 20

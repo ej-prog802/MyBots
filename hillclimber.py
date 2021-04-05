@@ -6,7 +6,7 @@ import copy
 class HILL_CLIMBER:
 
     def __init__(self):
-        self.parent = solution.SOLUTION()
+        self.parent = solution.SOLUTION(0)
 
     def Evolve(self):
         show = False
@@ -16,7 +16,6 @@ class HILL_CLIMBER:
                 # show = True
                 pass
             self.Evolve_For_One_Generation(show)
-        self.Show_Best()
 
     def Evolve_For_One_Generation(self, show):
         self.Spawn()
@@ -26,11 +25,9 @@ class HILL_CLIMBER:
 
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
-        pass
 
     def Mutate(self):
         self.child.Mutate()
-        pass
 
     def Select(self):
         print("\nP=" + str(self.parent.fitness) + " : C=" + str(self.child.fitness))
