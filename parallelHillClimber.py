@@ -59,7 +59,6 @@ class PARALLEL_HILL_CLIMBER:
     def Show_Best(self):
         best = None
         bestK = None
-
         for key in self.parents:
             if best is None:
                 best = self.parents[key]
@@ -74,8 +73,8 @@ class PARALLEL_HILL_CLIMBER:
 
     def Print(self):
         record = "Generation " + str(self.generationId) + ":\n"
-        #print('\n')
+        print("\nGeneration " + str(self.generationId) + ":")
         for key in self.parents:
             record += "Set"+key+" [P:<" + str(self.parents[key].fitness) + "> C:<" + str(self.children[key].fitness) + ">]\n "
-            #print("P:<" + str(self.parents[key].fitness) + "> C:<" + str(self.children[key].fitness) + ">")
+            print("P:<" + str(self.parents[key].fitness) + "> C:<" + str(self.children[key].fitness) + ">")
         self.record.write(record)

@@ -1,11 +1,14 @@
 import numpy
 import os
 import pybullet as p
+import constants as c
 import pyrosim.pyrosim as pyrosim
 from pyrosim.neuralNetwork import NEURAL_NETWORK
 from motor import MOTOR
 from sensor import SENSOR
+import numpy as np
 class ROBOT:
+
     def __init__(self, id1):
         self.sensors = {}
         self.motors = {}
@@ -27,12 +30,7 @@ class ROBOT:
 
     def Prepare_To_Act(self):
         for jointName in pyrosim.jointNamesToIndices:
-            if jointName == "Torso_BackLeg":
-                self.motors[jointName] = MOTOR(jointName)
-                self.motors[jointName].frequency = self.motors[jointName].frequency / 2
-                self.motors[jointName].Prepare_To_Act()
-            else:
-                self.motors[jointName] = MOTOR(jointName)
+            self.motors[jointName] = MOTOR(jointName)
 
 
     def Act(self):
@@ -40,7 +38,7 @@ class ROBOT:
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
-                self.motors[jointName].Set_Value(self.robot, desiredAngle)
+                self.motors[jointName].Set_Value(self.robot, desiredAngle*c.motorJointRange)
 
     def Think(self):
         self.nn.Update()
@@ -52,9 +50,21 @@ class ROBOT:
             numpy.save("Data/" + jointName + ".npy", self.motors[jointName].motorValues)
 
     def Get_Fitness(self):
-        stateOfLinkZero = p.getLinkState(self.robot,0)[0]
-        xCoordinateOfLinkZero = stateOfLinkZero[0]
-        file = open('tmp'+self.myID+'.txt', 'w')
-        file.write(str(xCoordinateOfLinkZero))
+        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
+        basePosition = basePositionAndOrientation[0]
+        xPosition = basePosition[0]
+        yPosition = basePosition[1]
+        zPosition = basePosition[2]
+        footSense = []
+        for i in range(0, c.sz - 1):
+            FrontFoot = self.sensors["FrontFoot"].values[i]
+            BackFoot = self.sensors["BackFoot"].values[i]
+            LeftFoot = self.sensors["LeftFoot"].values[i]
+            RightFoot = self.sensors["RightFoot"].values[i]
+            footSense.append(numpy.mean([FrontFoot,BackFoot,LeftFoot,RightFoot]))
+        offset = numpy.log((numpy.abs(yPosition) + numpy.abs(xPosition)))*c.offWeight
+        height = numpy.log(zPosition)*c.heightWeight
+        jummpyness = (0-height)+offset
+        file = open('fitness'+self.myID+'.txt', 'w')
+        file.write(str(jummpyness))
         file.close()
-        os.system('mv tmp'+self.myID+'.txt fitness'+self.myID+'.txt')
