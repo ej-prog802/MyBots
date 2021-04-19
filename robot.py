@@ -63,7 +63,8 @@ class ROBOT:
             footSense.append(numpy.mean([FrontFoot,BackFoot,LeftFoot,RightFoot]))
         offset = numpy.log((numpy.abs(yPosition) + numpy.abs(xPosition)))*c.offWeight
         height = numpy.log(zPosition)*c.heightWeight
-        jummpyness = (0-height)+offset
+        footSense = numpy.mean(footSense)*c.footWeight
+        jummpyness = (footSense-height)+offset
         file = open('fitness'+self.myID+'.txt', 'w')
         file.write(str(jummpyness))
         file.close()
