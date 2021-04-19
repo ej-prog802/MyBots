@@ -6,7 +6,6 @@ import pyrosim.pyrosim as pyrosim
 from pyrosim.neuralNetwork import NEURAL_NETWORK
 from motor import MOTOR
 from sensor import SENSOR
-import numpy as np
 class ROBOT:
 
     def __init__(self, id1):

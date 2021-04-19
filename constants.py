@@ -9,5 +9,5 @@ populationSize = 10
 numSensorNeurons = 9
 numMotorNeurons = 8
 motorJointRange = 0.5
-offWeight = 0.5
+offWeight = 0.2
 heightWeight = 1
