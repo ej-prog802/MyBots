@@ -53,7 +53,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self):
         for key in self.parents:
-            if ((self.children[key].fitness < self.parents[key].fitness) or (self.parents[key].fitness==0)) and self.children[key].fitness != 0:
+            if ((self.children[key].fitness > self.parents[key].fitness) or (self.parents[key].fitness==0)) and self.children[key].fitness != 0:
                 self.parents[key] = self.children[key]
 
     def Show_Best(self):
@@ -64,7 +64,7 @@ class PARALLEL_HILL_CLIMBER:
                 best = self.parents[key]
                 bestK = key
             else:
-                if best.fitness > self.parents[key].fitness:
+                if best.fitness < self.parents[key].fitness:
                     best = self.parents[key]
                     bestK = key
         if best is not None:

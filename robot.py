@@ -19,6 +19,19 @@ class ROBOT:
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
 
+    def Consec(feet):
+        x = 0
+        best = 0
+        for i in feet:
+            if i == 1:
+                x+=1
+            elif i!=1 & best<=x:
+                best = x
+                x = 0
+            else:
+                x=0
+        return best
+
     def Prepare_To_Sense(self):
         for linkName in pyrosim.linkNamesToIndices:
             self.sensors[linkName] = SENSOR(linkName)
@@ -61,10 +74,11 @@ class ROBOT:
             LeftFoot = self.sensors["LeftFoot"].values[i]
             RightFoot = self.sensors["RightFoot"].values[i]
             footSense.append(numpy.mean([FrontFoot,BackFoot,LeftFoot,RightFoot]))
-        offset = numpy.log((numpy.abs(yPosition) + numpy.abs(xPosition)))*c.offWeight
-        height = numpy.log(zPosition)*c.heightWeight
+        offset = (numpy.abs(yPosition) + numpy.abs(xPosition))*c.offWeight
+        height = zPosition*c.heightWeight
         footSense = numpy.mean(footSense)*c.footWeight
-        jummpyness = (footSense-height)+offset
+        airTime = self.Consec(footSense)*c.airWeight
+        jummpyness = (footSense+height)-offset
         file = open('fitness'+self.myID+'.txt', 'w')
         file.write(str(jummpyness))
         file.close()
