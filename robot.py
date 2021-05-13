@@ -79,7 +79,7 @@ class ROBOT:
         height = zPosition*c.heightWeight
         airTime = self.Consec(footSense) * c.airWeight
         footSense = numpy.mean(footSense)*c.footWeight
-        jummpyness = (footSense+height+airTime)-offset
+        jummpyness = (height+airTime)-offset-footSense
         file = open('fitness'+self.myID+'.txt', 'w')
         file.write(str(jummpyness))
         file.close()
