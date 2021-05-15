@@ -14,6 +14,8 @@ class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
+        fitArr = [0.0] * c.populationSize
+        self.fitArr = [fitArr] * c.numberOfGenerations
         self.record = open('evolutionHistory.txt', 'w')
         self.generationId = 0
         self.parents = {}
@@ -52,9 +54,13 @@ class PARALLEL_HILL_CLIMBER:
             solutions[x].Wait_For_Simulation_To_End()
 
     def Select(self):
+        i = 0
         for key in self.parents:
             if ((self.children[key].fitness > self.parents[key].fitness) or (self.parents[key].fitness==0)) and self.children[key].fitness != 0:
                 self.parents[key] = self.children[key]
+            self.fitArr[self.generationId][i] = self.parents[key].fitness
+            i+=1
+
 
     def Show_Best(self):
         best = None
@@ -70,6 +76,8 @@ class PARALLEL_HILL_CLIMBER:
         if best is not None:
             self.record.write('\nBest solution set:'+bestK+' fitness:'+str(best.fitness))
             best.Start_Simulation(True)
+            for matix in self.fitArr:
+                print(matix)
 
     def Print(self):
         record = "Generation " + str(self.generationId) + ":\n"
