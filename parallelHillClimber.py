@@ -75,8 +75,9 @@ class PARALLEL_HILL_CLIMBER:
                     bestK = key
         if best is not None:
             self.record.write('\nBest solution set:'+bestK+' fitness:'+str(best.fitness))
-            print(self.fitArr)
             best.Start_Simulation(True)
+            for matix in self.fitArr:
+                print(matix)
 
     def Print(self):
         record = "Generation " + str(self.generationId) + ":\n"
