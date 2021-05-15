@@ -74,7 +74,8 @@ class ROBOT:
             BackFoot = self.sensors["BackFoot"].values[i]
             LeftFoot = self.sensors["LeftFoot"].values[i]
             RightFoot = self.sensors["RightFoot"].values[i]
-            footSense.append(numpy.mean([FrontFoot,BackFoot,LeftFoot,RightFoot]))
+            Torso = self.sensors["Torso"].values[i]
+            footSense.append(numpy.mean([FrontFoot, BackFoot, LeftFoot, RightFoot, Torso]))
         offset = (numpy.abs(yPosition) + numpy.abs(xPosition))*c.offWeight
         height = zPosition*c.heightWeight
         airTime = self.Consec(footSense) * c.airWeight
