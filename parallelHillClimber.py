@@ -56,7 +56,7 @@ class PARALLEL_HILL_CLIMBER:
     def Select(self):
         i = 0
         for key in self.parents:
-            if ((self.children[key].fitness > self.parents[key].fitness) or (self.parents[key].fitness==0)) and self.children[key].fitness != 0:
+            if self.children[key].fitness != 0:
                 self.parents[key] = self.children[key]
             self.fitArr[self.generationId][i] = self.parents[key].fitness
             i+=1
@@ -76,8 +76,8 @@ class PARALLEL_HILL_CLIMBER:
         if best is not None:
             self.record.write('\nBest solution set:'+bestK+' fitness:'+str(best.fitness))
             best.Start_Simulation(True)
-            np.savetxt('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionA.out', self.fitArr)
-            np.save('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionA',self.fitArr)
+            np.savetxt('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionC.out', self.fitArr)
+            np.save('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionC',self.fitArr)
 
     def Print(self):
         record = "Generation " + str(self.generationId) + ":\n"
