@@ -24,9 +24,9 @@ class ROBOT:
         x = 0
         best = 0
         for i in feet:
-            if i == -1:
+            if i != -1:
                 x+=1
-            elif i!=-1 & best<=x:
+            elif i==-1 & best<=x:
                 best = x
                 x = 0
             else:
