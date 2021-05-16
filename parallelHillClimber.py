@@ -1,6 +1,6 @@
 import os
 from typing import Dict
-
+import numpy as np
 import solution
 import constants as c
 import copy
@@ -34,7 +34,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
-        self.Print()
+        #self.Print()
         self.Select()
 
     def Spawn(self):
@@ -76,8 +76,7 @@ class PARALLEL_HILL_CLIMBER:
         if best is not None:
             self.record.write('\nBest solution set:'+bestK+' fitness:'+str(best.fitness))
             best.Start_Simulation(True)
-            for matix in self.fitArr:
-                print(matix)
+            np.savetxt('Outs/VersionA.out', self.fitArr)
 
     def Print(self):
         record = "Generation " + str(self.generationId) + ":\n"
