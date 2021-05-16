@@ -12,4 +12,4 @@ motorJointRange = 0.75
 offWeight = 0
 heightWeight = 0.5
 footWeight = 0
-airWeight = 2
+airWeight = 1
