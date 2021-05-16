@@ -56,7 +56,8 @@ class PARALLEL_HILL_CLIMBER:
     def Select(self):
         i = 0
         for key in self.parents:
-            self.parents[key] = self.children[key]
+            if ((self.children[key].fitness > self.parents[key].fitness) or (self.parents[key].fitness == 0)) and self.children[key].fitness != 0:
+                self.parents[key] = self.children[key]
             self.fitArr[self.generationId][i] = self.parents[key].fitness
             i+=1
 

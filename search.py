@@ -7,3 +7,4 @@ phc.Evolve()
 phc.Show_Best()
 phc.record.close()
 os.system('rm 1')
+
