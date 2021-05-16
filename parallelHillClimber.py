@@ -14,8 +14,8 @@ class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
-        self.fitArr = [ [ None for y in range( c.populationSize ) ]
-             for x in range( c.numberOfGenerations ) ]
+        self.fitArr = [[None for y in range(c.populationSize)]
+                       for x in range(c.numberOfGenerations)]
         self.record = open('evolutionHistory.txt', 'w')
         self.generationId = 0
         self.parents = {}
@@ -56,9 +56,9 @@ class PARALLEL_HILL_CLIMBER:
     def Select(self):
         i = 0
         for key in self.parents:
-            if ((self.children[key].fitness > self.parents[key].fitness) or (self.parents[key].fitness==0)) and self.children[key].fitness != 0:
+            if ((self.children[key].fitness > self.parents[key].fitness) or (self.parents[key].fitness == 0)) and self.children[key].fitness != 0:
                 self.parents[key] = self.children[key]
-            self.fitArr[self.generationId][i]=self.parents[key].fitness
+            self.fitArr[self.generationId][i] = self.parents[key].fitness
             i+=1
 
 
@@ -76,8 +76,8 @@ class PARALLEL_HILL_CLIMBER:
         if best is not None:
             self.record.write('\nBest solution set:'+bestK+' fitness:'+str(best.fitness))
             best.Start_Simulation(True)
-            np.savetxt('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionB.out', self.fitArr)
-            np.save('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionB', self.fitArr)
+            #np.savetxt('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionB.out', self.fitArr)
+            #np.save('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionB',self.fitArr)
 
     def Print(self):
         record = "Generation " + str(self.generationId) + ":\n"
