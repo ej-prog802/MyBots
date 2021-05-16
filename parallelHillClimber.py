@@ -76,7 +76,8 @@ class PARALLEL_HILL_CLIMBER:
         if best is not None:
             self.record.write('\nBest solution set:'+bestK+' fitness:'+str(best.fitness))
             best.Start_Simulation(True)
-            np.savetxt('Outs/VersionA.out',self.fitArr)
+            np.savetxt('CS206out/VersionA.out', self.fitArr)
+            np.save('CS206out/VersionA',self.fitArr)
 
     def Print(self):
         record = "Generation " + str(self.generationId) + ":\n"

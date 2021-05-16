@@ -11,5 +11,5 @@ numMotorNeurons = 8
 motorJointRange = 0.75
 offWeight = 0
 heightWeight = 1
-footWeight = 1
+footWeight = 0.5
 airWeight = 2
