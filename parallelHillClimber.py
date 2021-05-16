@@ -34,7 +34,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
-        self.Print()
+        #self.Print()
         self.Select()
 
     def Spawn(self):
@@ -75,7 +75,7 @@ class PARALLEL_HILL_CLIMBER:
                     bestK = key
         if best is not None:
             self.record.write('\nBest solution set:'+bestK+' fitness:'+str(best.fitness))
-            best.Start_Simulation(False)
+            best.Start_Simulation(True)
             np.savetxt('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionB.out', self.fitArr)
             np.save('/Users/emmettoconnell/School/CompSci/CS206out/Out/VersionB', self.fitArr)
 
